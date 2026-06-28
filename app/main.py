@@ -5,12 +5,10 @@ from app.routers import ingest, chat, projects
 
 app = FastAPI(title="DocuChat API")
 
-# In production, replace "*" with your actual Lovable/Vercel frontend domain
-ALLOWED_ORIGINS = os.environ.get("ALLOWED_ORIGINS", "*").split(",")
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=["https://*.lovable.app", "https://*.lovableproject.com", "http://localhost:8080"],
+    allow_origin_regex=r"https://.*\.lovable(project)?\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
