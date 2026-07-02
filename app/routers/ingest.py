@@ -1,6 +1,6 @@
 import io
 import uuid
-from fastapi import APIRouter, UploadFile, File, Form, HTTPException
+from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Query
 import pypdf
 from app.services.pinecone_service import upsert_chunks
 
@@ -67,3 +67,20 @@ async def ingest_pdf(
         "chunks": len(chunks),
         "pages": len(pypdf.PdfReader(io.BytesIO(file_bytes)).pages)
     }
+
+
+
+@router.delete("/")
+async def delete_document(
+    project_id: str = Query(...),
+    user_id: str = Query(...),
+    filename: str = Query(...)
+):
+    from app.services.pinecone_service import _get_index
+    index = _get_index()
+    namespace = f"{user_id}_{project_id}"
+    index.delete(
+        filter={"source": filename},
+        namespace=namespace
+    )
+    return {"message": f"{filename} deleted successfully"}
