@@ -65,7 +65,7 @@ def query_index(query: str, namespace: str, top_k: int = 5) -> list[dict]:
             "score": m.score
         }
         for m in results.matches
-        if m.score > 0.3  # Filter out low-relevance results
+        if m.score > 0.15  # Filter out low-relevance results
     ]
 
 def delete_namespace(namespace: str):
