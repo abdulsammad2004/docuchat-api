@@ -74,7 +74,7 @@ async def chat(req: ChatRequest):
         yield f"__SOURCES__{json.dumps(sources)}__SOURCES_END__\n"
         with claude.messages.stream(
             model="claude-sonnet-4-6",
-            max_tokens=512,
+            max_tokens=250,
             temperature=0.3,
             system=SYSTEM_PROMPT,
             messages=[{"role": "user", "content": user_message}]
