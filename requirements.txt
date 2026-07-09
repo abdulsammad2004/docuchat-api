@@ -8,3 +8,5 @@ pinecone==5.4.2
 pydantic==2.9.2
 supabase==2.9.1
 python-jose[cryptography]==3.3.0
+beautifulsoup4==4.12.3
+httpx==0.27.0
